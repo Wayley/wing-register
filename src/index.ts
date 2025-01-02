@@ -1,4 +1,4 @@
-export class Register<T extends Function> {
+export class Register<T extends (v: V) => void, V> {
   #registers: T[];
 
   constructor() {
@@ -15,8 +15,8 @@ export class Register<T extends Function> {
     if (i > -1) this.#registers.splice(i, 1);
   }
 
-  excute() {
-    this.#registers.forEach((t) => t());
+  excute(v: V) {
+    this.#registers.forEach((t) => t(v));
   }
 
   clear() {
